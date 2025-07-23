@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+} 
+
+body {
+  scroll-behavior: smooth;
+  scrollbar-color: #af0000;
+  overflow-y: scroll;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-family: 'Didact Gothic', sans-serif;
+}
+
+input,
+select,
+.switchButton {
+  padding: 2% 3%;
+}
+
+section {
+  padding: 1%;
+}
+
+.accountNum {
+  padding: 3%;
+}
+.dashboardComponent{  
+  padding: 2%;
+  justify-content: center;
+  align-items: center;
+}
+
+.bankComponent {
+  padding: 2%;
+}
+
+.userDashboard {
+  padding: 2% 0;
+}
+.react-phone-input .flag-dropdown:hover {
+  background-color: #f3f3f3;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.successmodal {
+  padding: 4%;
+  width: 100%;
+}
+
+/* #f20000 - Light Red
+#af0000 - Deep red
+#4d4d4d - deep gray
+#808080 - Light gray */
