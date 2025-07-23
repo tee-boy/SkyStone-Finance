@@ -16,7 +16,7 @@ export default function Dashboard() {
   const [showRemoveConfirm, setShowRemoveConfirm] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [cardDetails, setCardDetails] = useState({ number: "", expiry: "", cvv: "" });
-   const [cardType, setCardType] = useState('');
+   const [, setCardType] = useState('');
 
 
   // Utility functions

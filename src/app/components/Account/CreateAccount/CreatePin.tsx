@@ -9,7 +9,7 @@ const PIN_LENGTH = 4;
 export default function SetTransactionPin() {
   const [pin, setPin] = useState<string[]>(Array(PIN_LENGTH).fill(''));
   const [isGlitching, setIsGlitching] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isError] = useState(false);
   const [hasTyped, setHasTyped] = useState(false);
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
