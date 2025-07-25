@@ -5,6 +5,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { useRouter } from 'next/navigation';
 import Navbar from "@/app/components/ReUsable/Navbar";
 import { FiCopy, FiEdit, FiTrash2 } from "react-icons/fi";
+import Image from 'next/image'
 
 export default function Dashboard() {
   const router = useRouter();
@@ -167,7 +168,7 @@ const detectCardType = (number: string) => {
 
                 {!savedCard ? (
                   <div className="flex flex-col items-center justify-center py-6 text-center text-gray-500">
-                    <img
+                    <Image
                       src="/images/no-card.png"
                       alt="No Card"
                       className="w-16 h-16 mb-2"

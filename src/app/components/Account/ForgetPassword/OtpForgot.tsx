@@ -187,7 +187,7 @@ export default function Otp() {
 
           {!showResend ? (
             <div className="flex flex-col items-center gap-1 mt-2">
-              <p className="text-md text-[#4d4d4d]">Didn't receive any OTP?</p>
+              <p className="text-md text-[#4d4d4d]">Didn&apos;t receive any OTP?</p>
               <p className="text-[#af0000] text-md font-bold">Resend code in {minutes}:{seconds}</p>
             </div>
           ) : (
