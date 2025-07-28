@@ -13,13 +13,11 @@ import { PiTelevisionSimpleLight } from "react-icons/pi";
 import { TbSquarePercentage } from "react-icons/tb";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { RiUserLine } from "react-icons/ri";
-// import { AiOutlineUser } from 'react-icons/ai';
 import { BsFillLightningChargeFill } from 'react-icons/bs';
-// import { FaMoneyBillTransfer } from 'react-icons/fa6';
-// import { FaWallet } from 'react-icons/fa';
 import "@/app/globals.css";
 import Navbar from "@/app/components/ReUsable/Navbar";
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Dashboard() {
   const [copied, setCopied] = useState(false);
@@ -99,7 +97,7 @@ export default function Dashboard() {
          <div className='flex gap-1'>
           <div className="flex items-center gap-1 cursor-pointer" onClick={handleProfileClick}>
             {profileImage ? (
-              <img src={profileImage} alt="Profile" className="h-8 w-8 text-gray-500 rounded-full object-cover active:scale-95 active:shadow-sm duration-150 transition-transform cursor-pointer" />
+              <Image src={profileImage} alt="Profile" className="h-8 w-8 text-gray-500 rounded-full object-cover active:scale-95 active:shadow-sm duration-150 transition-transform cursor-pointer" />
             ) : (
               <RiUserLine className="h-8 w-8 text-gray-500 rounded-full bg-gray-300 active:scale-95 active:shadow-sm duration-150 transition-transform cursor-pointer" />
             )}
