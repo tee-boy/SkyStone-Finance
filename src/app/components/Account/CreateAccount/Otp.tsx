@@ -64,7 +64,7 @@ export default function Otp() {
   const toastId = toast.loading('Verifying OTP...');
   setTimeout(() => {
     toast.success(`OTP ${code} verified successfully`, { id: toastId });
-    router.push('/CreatePin'); // ✅ Redirect to CreatePin page
+    router.push('/CreatePin');
   }, 1500);
 };
 
@@ -157,7 +157,6 @@ export default function Otp() {
           <div className="flex flex-col w-full mt-6">
             <button
               type="submit"
-
               className="bg-[#af0000] hover:bg-[#f20000] active:scale-95 active:shadow-sm duration-150 transition-transform h-14 rounded-[15px] cursor-pointer text-white font-semibold text-md"
             >
               Continue
