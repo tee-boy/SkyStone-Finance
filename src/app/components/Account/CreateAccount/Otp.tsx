@@ -61,12 +61,13 @@ export default function Otp() {
   }, [timer, handleResend]);
 
   const verifyOtp = async (code: string) => {
-    const toastId = toast.loading('Verifying OTP...');
-    setTimeout(() => {
-      toast.success(`OTP ${code} verified successfully`, { id: toastId });
-      router.push('/account/create-password');
-    }, 1500);
-  };
+  const toastId = toast.loading('Verifying OTP...');
+  setTimeout(() => {
+    toast.success(`OTP ${code} verified successfully`, { id: toastId });
+    router.push('/CreatePin'); // ✅ Redirect to CreatePin page
+  }, 1500);
+};
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,18 +145,19 @@ export default function Otp() {
             </div>
           ) : (
             <button
-              onClick={handleResend}
-
-              type="button"
-              className="mt-2 text-[#af0000] font-semibold text-md active:scale-95 active:shadow-sm duration-150 transition-transform"
-            >
-              Resend Code
+                onClick={handleResend}
+                type="button"
+                className="mt-2 text-[#af0000] font-semibold text-md active:scale-95 active:shadow-sm duration-150 transition-transform"
+              >
+                Resend Code
             </button>
+
           )}
 
           <div className="flex flex-col w-full mt-6">
             <button
               type="submit"
+
               className="bg-[#af0000] hover:bg-[#f20000] active:scale-95 active:shadow-sm duration-150 transition-transform h-14 rounded-[15px] cursor-pointer text-white font-semibold text-md"
             >
               Continue
