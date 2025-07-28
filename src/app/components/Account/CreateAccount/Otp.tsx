@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { IoMdArrowRoundBack } from 'react-icons/io';
-import { MdArrowBack } from 'react-icons/md';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
@@ -12,8 +11,8 @@ export default function Otp() {
   const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(''));
   const [timer, setTimer] = useState(TIMER_SECONDS);
   const [showResend, setShowResend] = useState(false);
-  const [isGlitching, setIsGlitching] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isGlitching] = useState(false);
+  const [isError] = useState(false);
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
 
@@ -146,6 +145,7 @@ export default function Otp() {
           ) : (
             <button
               onClick={handleResend}
+
               type="button"
               className="mt-2 text-[#af0000] font-semibold text-md active:scale-95 active:shadow-sm duration-150 transition-transform"
             >
