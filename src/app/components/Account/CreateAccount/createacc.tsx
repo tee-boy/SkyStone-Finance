@@ -4,16 +4,51 @@ import 'react-phone-input-2/lib/style.css';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { RiCustomerServiceLine } from "react-icons/ri";
 import {useRouter} from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+// ✅ Import Supabase
+import { createClient } from '@supabase/supabase-js';
+
+// ✅ Create Supabase client (use your real values from Supabase project settings)
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export default function CreateAcc() {
   const router = useRouter();
+
+  // ✅ Form state
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
   // Prefetch routes to speed up navigation
   useEffect(() => {
     router.prefetch('/CreatePassword');
     router.prefetch('/GetStarted');
   }, [router]);
+
+  // ✅ Save to Supabase
+  const handleSubmit = async () => {
+    const { data, error } = await supabase
+      .from('users')
+      .insert([{ 
+        first_name: firstName, 
+        second_name: lastName, 
+        email, 
+        phone 
+      }]);
+
+    if (error) {
+      console.error('Error saving user:', error);
+      alert('Failed to save user!');
+    } else {
+      console.log('User saved:', data);
+      router.push('/CreatePassword');
+    }
+  };
 
   return (
     <section className="flex justify-center items-center h-screen bg-white px-4">
@@ -34,14 +69,34 @@ export default function CreateAcc() {
         </div>
 
         <div className="flex flex-col w-full gap-2">
-          <input type="text" placeholder="First Name" className="bg-[#f3f3f3] h-14 rounded-[15px] w-full text-black active:scale-95 active:shadow-sm duration-150 transition-transform cursor-text font-800 text-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#af0000] backdrop-blur-md shadow-[inset_0_2px_4px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.2)]" />
-          <input type="text" placeholder="Last Name" className="bg-[#f3f3f3] h-14 rounded-[15px] w-full text-black active:scale-95 active:shadow-sm duration-150 transition-transform cursor-text font-800 text-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#af0000] backdrop-blur-md shadow-[inset_0_2px_4px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.2)]" />
-          <input type="email" placeholder="Email Address" className="bg-[#f3f3f3] h-14 rounded-[15px] w-full text-black active:scale-95 active:shadow-sm duration-150 transition-transform cursor-text font-800 text-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#af0000] backdrop-blur-md shadow-[inset_0_2px_4px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.2)]" />
+          <input 
+            type="text" 
+            placeholder="First Name" 
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className="bg-[#f3f3f3] h-14 rounded-[15px] w-full text-black active:scale-95 active:shadow-sm duration-150 transition-transform cursor-text font-800 text-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#af0000] backdrop-blur-md shadow-[inset_0_2px_4px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.2)]" 
+          />
+          <input 
+            type="text" 
+            placeholder="Last Name" 
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            className="bg-[#f3f3f3] h-14 rounded-[15px] w-full text-black active:scale-95 active:shadow-sm duration-150 transition-transform cursor-text font-800 text-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#af0000] backdrop-blur-md shadow-[inset_0_2px_4px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.2)]" 
+          />
+          <input 
+            type="email" 
+            placeholder="Email Address" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="bg-[#f3f3f3] h-14 rounded-[15px] w-full text-black active:scale-95 active:shadow-sm duration-150 transition-transform cursor-text font-800 text-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#af0000] backdrop-blur-md shadow-[inset_0_2px_4px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.2)]" 
+          />
 
           <div className="flex w-full gap-2">
             <PhoneInput
               country={'ng'}
               enableSearch={true}
+              value={phone}
+              onChange={(value) => setPhone(value)}
               containerClass="flex w-full gap-2"
               buttonClass="!bg-[#f3f3f3] !h-14 !rounded-[15px] !w-10 active:scale-95 active:shadow-sm duration-150 transition-transform cursor-pointer font-800 text-md px-2 py-3 hover:!bg-[#f3f3f3] focus:outline-none focus:ring-2 focus:ring-[#af0000] backdrop-blur-md shadow-[inset_0_2px_4px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.2)]"
               inputClass="!bg-[#f3f3f3] !h-14 !rounded-[15px] !w-full !text-black active:scale-95 active:shadow-sm duration-150 transition-transform cursor-text font-800 text-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#af0000] backdrop-blur-md shadow-[inset_0_2px_4px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.2)]"
@@ -49,7 +104,6 @@ export default function CreateAcc() {
           </div>
         </div>
 
-        {/* Added: Terms text */}
         <p className="text-xs text-center text-[#4d4d4d] mt-2">
           By clicking on continue, you agree to Skystone’s{' '} 
           <br /><span className="text-[#af0000] font-semibold">Terms & Conditions and Privacy Policy</span>
@@ -57,20 +111,18 @@ export default function CreateAcc() {
 
         <div className="flex flex-col w-full gap-3 mt-2">
           <button
-          onClick={() => router.push('/CreatePassword')}
+          onClick={handleSubmit}  // ✅ Save to Supabase
           className="bg-[#af0000] hover:bg-[#f20000] active:scale-95 active:shadow-sm duration-150 transition-transform h-14 rounded-[15px] cursor-pointer text-white font-semibold text-md">
             Continue
           </button>
         </div>
 
-        {/* Added: Already have an account */}
         <p className="text-sm text-center text-[#4d4d4d] mt-2">
           Already have an account? <span
           onClick={() => router.push('/Login')}
            className="text-[#af0000] active:scale-95 active:shadow-sm duration-150 transition-transform font-semibold cursor-pointer">Login</span>
         </p>
 
-        {/* Added: Contact support */}
         <button
           type="button" className=" bg-[#f3f3f3] h-12 w-40 justify-center items-center flex row gap-1 rounded-full text-[#4d4d4d] font-semibold text-sm active:scale-95 active:shadow-sm duration-150 transition-transform">
           <RiCustomerServiceLine /> <span>Contact support</span>
