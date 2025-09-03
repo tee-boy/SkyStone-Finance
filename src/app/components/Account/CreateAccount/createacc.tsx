@@ -35,8 +35,8 @@ export default function CreateAcc() {
     const { data, error } = await supabase
       .from('users')
       .insert([{ 
-        first_name: firstName, 
-        second_name: lastName, 
+        first_Name: firstName, 
+        last_Name: lastName, 
         email, 
         phone 
       }]);
