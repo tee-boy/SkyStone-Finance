@@ -5,11 +5,8 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { RiCustomerServiceLine } from "react-icons/ri";
 import {useRouter} from 'next/navigation';
 import { useEffect, useState } from 'react';
-
-// ✅ Import Supabase
 import { createClient } from '@supabase/supabase-js';
 
-// ✅ Create Supabase client (use your real values from Supabase project settings)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -18,20 +15,17 @@ const supabase = createClient(
 export default function CreateAcc() {
   const router = useRouter();
 
-  // ✅ Form state
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
-  // Prefetch routes to speed up navigation
   useEffect(() => {
     router.prefetch('/CreatePassword');
     router.prefetch('/GetStarted');
   }, [router]);
 
-  // ✅ Save to Supabase
-  const handleSubmit = async () => {
+const handleSubmit = async () => {
     const { data, error } = await supabase
       .from('users')
       .insert([{ 
@@ -111,7 +105,7 @@ export default function CreateAcc() {
 
         <div className="flex flex-col w-full gap-3 mt-2">
           <button
-          onClick={handleSubmit}  // ✅ Save to Supabase
+          onClick={handleSubmit}
           className="bg-[#af0000] hover:bg-[#f20000] active:scale-95 active:shadow-sm duration-150 transition-transform h-14 rounded-[15px] cursor-pointer text-white font-semibold text-md">
             Continue
           </button>
